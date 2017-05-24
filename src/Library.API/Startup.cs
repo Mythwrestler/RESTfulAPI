@@ -11,6 +11,9 @@ using Microsoft.Extensions.Configuration;
 using Library.API.Services;
 using Library.API.Entities;
 using Microsoft.EntityFrameworkCore;
+using Library.API.Helpers;
+using AutoMapper;
+using Microsoft.AspNetCore.Mvc.Formatters;
 
 namespace Library.API
 {
@@ -33,7 +36,10 @@ namespace Library.API
         // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+            services.AddMvc(setupAction => {
+                setupAction.ReturnHttpNotAcceptable = true;
+                setupAction.OutputFormatters.Add(new XmlDataContractSerializerOutputFormatter());
+            });
 
             // register the DbContext on the container, getting the connection string from
             // appSettings (note: use this during development; in a production environment,
@@ -48,6 +54,9 @@ namespace Library.API
 
             // register the repository
             services.AddScoped<ILibraryRepository, LibraryRepository>();
+
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -62,8 +71,26 @@ namespace Library.API
             }
             else
             {
-                app.UseExceptionHandler();
+                app.UseExceptionHandler(appBuilder => {
+                    appBuilder.Run(async context => {
+                        context.Response.StatusCode = 500;
+                        await context.Response.WriteAsync("Unexpected fault. Please try again later.");
+                    });
+                });
             }
+
+
+            AutoMapper.Mapper.Initialize(config => {
+                config.CreateMap<Entities.Author, Models.AuthorDto>()
+                    .ForMember(destination => destination.Name, builder => builder.MapFrom(
+                        source => $"{source.FirstName} {source.LastName}"
+                    ))
+                    .ForMember(destination => destination.Age, builder => builder.MapFrom(
+                        source => source.DateOfBirth.GetCurrentAge()
+                    ));
+                config.CreateMap<Entities.Book, Models.BookDto>();
+            });
+
 
             libraryContext.EnsureSeedDataForContext();
 
