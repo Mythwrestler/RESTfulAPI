@@ -31,8 +31,8 @@ namespace Library.API.Controllers
             return Ok(books);
         }
 
-        [HttpGet("{bookId}")]
-        public IActionResult Get(Guid authorId, Guid bookId)
+        [HttpGet("{bookId}", Name="BookForAuthor")]
+        public IActionResult GetBookForAuthor(Guid authorId, Guid bookId)
         {
             if(!_libraryRepository.AuthorExists(authorId)) return NotFound();
 
@@ -41,6 +41,29 @@ namespace Library.API.Controllers
 
             var book = Mapper.Map<BookDto>(bookFromRepo);
             return Ok(book);
+        }
+
+
+        [HttpPost]
+        public IActionResult CreateBookForAuthor(Guid authorId ,[FromBody] BookForCreateDto book)
+        {
+            if(book == null) return BadRequest();
+            if(!_libraryRepository.AuthorExists(authorId)) return NotFound();
+
+            var newBook = Mapper.Map<Book>(book);
+            _libraryRepository.AddBookForAuthor(authorId,newBook);
+            if(!_libraryRepository.Save())
+            {
+                throw new Exception($"Creating book for author {authorId} failed on Save.");
+            }
+
+            var bookReturn = Mapper.Map<BookDto>(newBook);
+
+            return CreatedAtRoute(
+                "BookForAuthor",
+                 new {authorId = newBook.AuthorId, bookId = newBook.Id},
+                 bookReturn
+            );
         }
 
 

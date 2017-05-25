@@ -88,7 +88,9 @@ namespace Library.API
                     .ForMember(destination => destination.Age, builder => builder.MapFrom(
                         source => source.DateOfBirth.GetCurrentAge()
                     ));
+                config.CreateMap<Models.AuthorForCreateDto, Entities.Author>();
                 config.CreateMap<Entities.Book, Models.BookDto>();
+                config.CreateMap<Models.BookForCreateDto, Entities.Book>();
             });
 
 
