@@ -5,23 +5,24 @@ using Library.API.Entities;
 using Library.API.Models;
 using Library.API.Services;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace Library.API.Controllers
 {
-    [RouteAttribute("api/authorcollections")]
-    public class AuthorCollectionsController: Controller
+    [Route("api/authorcollections")]
+    public class AuthorCollectionsController : Controller
     {
         private ILibraryRepository _libaryRepository;
 
         public AuthorCollectionsController(ILibraryRepository libraryRepository)
         {
-         _libaryRepository = libraryRepository;   
+            _libaryRepository = libraryRepository;
         }
 
-        [HttpPostAttribute]
+        [HttpPost]
         public IActionResult CreateAuthorCollection([FromBodyAttribute] IEnumerable<AuthorForCreateDto> authorcollection)
         {
-            if(authorcollection == null) return BadRequest();
+            if (authorcollection == null) return BadRequest();
 
             var newAuthors = Mapper.Map<IEnumerable<Author>>(authorcollection);
 
@@ -29,15 +30,41 @@ namespace Library.API.Controllers
             {
                 _libaryRepository.AddAuthor(author);
             }
-            if(!_libaryRepository.Save())
+            if (!_libaryRepository.Save())
             {
                 throw new Exception("Creating author collection failed.");
             }
-            
-            return Ok();
+
+
+            var authorCollectionToReturn = Mapper.Map<IEnumerable<AuthorDto>>(newAuthors);
+            var idsToReturn = String.Join(",",authorCollectionToReturn.Select(x => x.Id));
+
+            return CreatedAtRoute("GetAuthorCollection",
+                                  new { ids = idsToReturn },
+                                  authorCollectionToReturn
+                                 );
 
         }
 
 
+        [HttpGet("({ids})", Name = "GetAuthorCollection")]
+        public IActionResult GetAuthorCollection(
+            [ModelBinder(BinderType = typeof(ArrayModelBinder))]IEnumerable<Guid> ids)
+        {
+            if (ids == null)
+            {
+                return BadRequest();
+            }
+
+            var authorEntities = _libaryRepository.GetAuthors(ids);
+
+            if (ids.Count() != authorEntities.Count())
+            {
+                return NotFound();
+            }
+
+            var authorsToReturn = Mapper.Map<IEnumerable<AuthorDto>>(authorEntities);
+            return Ok(authorsToReturn);
+        }
     }
 }
