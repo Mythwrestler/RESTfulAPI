@@ -64,7 +64,7 @@ namespace Library.API
         public void Configure(IApplicationBuilder app, IHostingEnvironment env,
             ILoggerFactory loggerFactory, LibraryContext libraryContext)
         {
-            loggerFactory.AddConsole();
+            loggerFactory.AddConsole().AddDebug();
 
             if (env.IsDevelopment())
             {
@@ -89,9 +89,12 @@ namespace Library.API
                     .ForMember(destination => destination.Age, builder => builder.MapFrom(
                         source => source.DateOfBirth.GetCurrentAge()
                     ));
-                config.CreateMap<Models.AuthorForCreateDto, Entities.Author>();
+                config.CreateMap<Models.AuthorForCreationDto, Entities.Author>();
                 config.CreateMap<Entities.Book, Models.BookDto>();
-                config.CreateMap<Models.BookForCreateDto, Entities.Book>();
+                config.CreateMap<Models.BookForCreationDto, Entities.Book>();
+                config.CreateMap<Models.BookForUpdateDTO, Entities.Book>();
+                config.CreateMap<Entities.Book, Models.BookForUpdateDTO>();
+
             });
 
 

@@ -2,7 +2,7 @@ using Library.API.Entities;
 
 namespace Library.API.Models
 {
-    public class BookForCreateDto
+    public class BookForCreationDto
     {
         public string Title { get; set; }
         public string Description { get; set; }

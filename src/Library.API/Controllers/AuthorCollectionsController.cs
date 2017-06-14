@@ -20,7 +20,7 @@ namespace Library.API.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateAuthorCollection([FromBodyAttribute] IEnumerable<AuthorForCreateDto> authorcollection)
+        public IActionResult CreateAuthorCollection([FromBodyAttribute] IEnumerable<AuthorForCreationDto> authorcollection)
         {
             if (authorcollection == null) return BadRequest();
 
