@@ -1,0 +1,20 @@
+﻿<Properties StartupConfiguration="{25AAC737-21A7-4BEE-A3BC-8539AFDB931B}|Default">
+  <MonoDevelop.Ide.ItemProperties.src.Library.API PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="RESTfulAPI Status">
+    <Files>
+      <File FileName="src/Library.API/Startup.cs" Line="97" Column="17" />
+      <File FileName="src/Library.API/Controllers/AuthorController.cs" Line="94" Column="29" />
+      <File FileName="src/Library.API/Models/AuthorForCreationDto.cs" Line="18" Column="2" />
+      <File FileName="src/Library.API/Controllers/AuthorCollectionsController.cs" Line="50" Column="56" />
+      <File FileName="src/Library.API/Controllers/BookController.cs" Line="161" Column="7" />
+      <File FileName="src/Library.API/Services/LibraryRepository.cs" Line="101" Column="9" />
+      <File FileName="RESTfulAPI Status" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+</Properties>
