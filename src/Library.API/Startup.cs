@@ -68,7 +68,8 @@ namespace Library.API
 
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
+				app.UseDeveloperExceptionPage();
+
             }
             else
             {
@@ -92,8 +93,8 @@ namespace Library.API
                 config.CreateMap<Models.AuthorForCreationDto, Entities.Author>();
                 config.CreateMap<Entities.Book, Models.BookDto>();
                 config.CreateMap<Models.BookForCreationDto, Entities.Book>();
-                config.CreateMap<Models.BookForUpdateDTO, Entities.Book>();
-                config.CreateMap<Entities.Book, Models.BookForUpdateDTO>();
+                config.CreateMap<Models.BookForUpdateDto, Entities.Book>();
+                config.CreateMap<Entities.Book, Models.BookForUpdateDto>();
 
             });
 

@@ -6,7 +6,7 @@ using System.ComponentModel;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
-namespace Library.API.Models
+namespace Library.API.Helpers
 {
     public class ArrayModelBinder : IModelBinder
     {
