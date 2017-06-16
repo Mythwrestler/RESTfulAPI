@@ -9,6 +9,7 @@ using Library.API.Models;
 using Library.API.Entities;
 using Microsoft.AspNetCore.JsonPatch;
 using Library.API.Helpers;
+using Microsoft.Extensions.Logging;
 
 namespace Library.API.Controllers
 {
@@ -16,10 +17,12 @@ namespace Library.API.Controllers
     public class BooksController : Controller
     {
         private ILibraryRepository _libraryRepository;
+        private ILogger<BooksController> _logger;
 
-        public BooksController(ILibraryRepository libraryRepository)
+        public BooksController(ILibraryRepository libraryRepository, ILogger<BooksController> logger)
         {
             _libraryRepository = libraryRepository;
+            _logger = logger;
         }
 
         [HttpGetAttribute]
@@ -96,6 +99,8 @@ namespace Library.API.Controllers
             {
                 throw new Exception($"Deleting book {bookId} for author {authorId} failed on save");
             }
+
+            _logger.LogInformation(100, $"Book {bookId} for author {authorId} was deleted.");
 
             return NoContent();
 
@@ -209,7 +214,7 @@ namespace Library.API.Controllers
 
             var bookToPatch = Mapper.Map<BookForUpdateDto>(bookFromRepo);
 
-            patchDoc.ApplyTo(bookToPatch, ModelState);
+            //patchDoc.ApplyTo(bookToPatch);
 
 			if (bookToPatch.Title == bookToPatch.Description)
 			{

@@ -1,16 +1,12 @@
-﻿<Properties StartupConfiguration="{25AAC737-21A7-4BEE-A3BC-8539AFDB931B}|Default">
+﻿<Properties StartupConfiguration="{25AAC737-21A7-4BEE-A3BC-8539AFDB931B}|Default" NuGet.AddPackagesDialog.IncludePrerelease="True">
   <MonoDevelop.Ide.ItemProperties.src.Library.API PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.Workbench ActiveDocument="RESTfulAPI Status">
     <Files>
-      <File FileName="src/Library.API/Controllers/BookController.cs" Line="175" Column="17" />
+      <File FileName="src/Library.API/Controllers/BookController.cs" Line="217" Column="13" />
       <File FileName="src/Library.API/Services/LibraryRepository.cs" Line="101" Column="9" />
-      <File FileName="src/Library.API/Startup.cs" Line="89" Column="23" />
-      <File FileName="src/Library.API/Entities/Book.cs" Line="1" Column="1" />
-      <File FileName="src/Library.API/Helpers/UnprocessableEntityObjectResult.cs" Line="15" Column="6" />
-      <File FileName="src/Library.API/Helpers/ArrayModelBinder.cs" Line="32" Column="50" />
-      <File FileName="src/Library.API/Models/BookForCreationDto.cs" Line="9" Column="2" />
-      <File FileName="src/Library.API/Models/BookForUpdateDTO.cs" Line="16" Column="41" />
-      <File FileName="src/Library.API/Models/BookForManipulationDto.cs" Line="8" Column="62" />
+      <File FileName="src/Library.API/Startup.cs" Line="75" Column="37" />
+      <File FileName="src/Library.API/Program.cs" Line="10" Column="2" />
+      <File FileName="src/Library.API/Library.API.csproj" Line="1" Column="1" />
       <File FileName="RESTfulAPI Status" />
     </Files>
   </MonoDevelop.Ide.Workbench>
