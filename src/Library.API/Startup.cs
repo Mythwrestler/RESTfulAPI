@@ -26,7 +26,8 @@ namespace Library.API
         public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
-                .SetBasePath(env.ContentRootPath)
+				.SetBasePath(env.ContentRootPath)
+				.AddJsonFile("dbConnections.json", optional: false, reloadOnChange: true)
                 .AddJsonFile("appSettings.json", optional: false, reloadOnChange: true)
                 .AddJsonFile($"appSettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true)
                 .AddEnvironmentVariables();
@@ -51,8 +52,10 @@ namespace Library.API
             //services.AddDbContext<LibraryContext>(o => o.UseSqlServer(connectionString));
             
             var sqliteConnectionString = Configuration["connectionStrings:SQLite"];
+            var mySQLConnectionString = Configuration["connectionStrings:MySQL"];
             services.AddDbContext<LibraryContext>(
-                options => options.UseSqlite(sqliteConnectionString)
+                //options => options.UseSqlite(sqliteConnectionString)
+                options => options.UseMySql(mySQLConnectionString)
             );
 
             // register the repository
