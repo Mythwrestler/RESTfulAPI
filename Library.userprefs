@@ -1,9 +1,14 @@
 ﻿<Properties StartupConfiguration="{25AAC737-21A7-4BEE-A3BC-8539AFDB931B}|Default" NuGet.AddPackagesDialog.IncludePrerelease="True">
   <MonoDevelop.Ide.ItemProperties.src.Library.API PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="RESTfulAPI Status">
+  <MonoDevelop.Ide.Workbench ActiveDocument="src/Library.API/Controllers/AuthorController.cs">
     <Files>
-      <File FileName="src/Library.API/Startup.cs" Line="60" Column="13" />
-      <File FileName="RESTfulAPI Status" />
+      <File FileName="src/Library.API/Controllers/AuthorController.cs" Line="96" Column="9" />
+      <File FileName="src/Library.API/Helpers/AuthorResourceParameters.cs" Line="32" Column="9" />
+      <File FileName="src/Library.API/Services/ILibraryRepository.cs" Line="9" Column="6" />
+      <File FileName="src/Library.API/Services/LibraryRepository.cs" Line="96" Column="13" />
+      <File FileName="src/Library.API/Helpers/PagedList.cs" Line="42" Column="10" />
+      <File FileName="src/Library.API/Startup.cs" Line="74" Column="13" />
+      <File FileName="src/Library.API/Helpers/ResourceUriType.cs" Line="7" Column="17" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />

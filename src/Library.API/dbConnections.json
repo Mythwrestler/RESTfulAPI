@@ -1,0 +1,7 @@
+﻿{
+  "connectionStrings": {
+    "SQLite": "Data Source=Library.API.db",
+    "MySQL": "Server=10.200.100.202;Database=Library_API;Uid=libraryapi;Pwd=t3lqr7@Z1;",
+    "SQLServer": "Server=(localdb)\\mssqllocaldb;Database=LibraryDB;Trusted_Connection=True;"
+  } 
+}
