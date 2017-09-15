@@ -15,7 +15,7 @@ namespace Library.API.Services
             {
                 {"Id", new PropertyMappingValue(new List<string>() {"Id"} )},
                 {"Genre", new PropertyMappingValue(new List<string>() {"Genre"} )},
-                {"Age", new PropertyMappingValue(new List<string>() {"Age"}, true )},
+                {"Age", new PropertyMappingValue(new List<string>() {"DateOfBirth"}, true )},
                 {"Name", new PropertyMappingValue(new List<string>() {"FirstName", "LastName"} )}
             };
 
@@ -43,6 +43,34 @@ namespace Library.API.Services
             throw new Exception($"Cannot find exact property mapping instance for <{typeof(TSource)}, {typeof(TDestination)}>");
 
         }
+
+
+        public bool ValidMappingExistsFor<TSource, TDestination>(string fields)
+        {
+            var propertyMapping = GetPropertyMapping<TSource, TDestination>();
+
+            if( string.IsNullOrWhiteSpace(fields)) return true;
+
+            var fieldsAfterSplit = fields.Split(',');
+
+            foreach (var field in fieldsAfterSplit)
+            {
+
+                var trimmedField = field.Trim();
+
+                var indexOfFirstSpace = trimmedField.IndexOf(" ");
+
+                var propertyName = indexOfFirstSpace == -1 ? trimmedField : trimmedField.Remove(indexOfFirstSpace);
+
+                if(!propertyMapping.ContainsKey(propertyName)) return false;
+
+            }
+
+            return true;
+
+        }
+
+
 
 
     }

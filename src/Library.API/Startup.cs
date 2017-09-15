@@ -57,8 +57,8 @@ namespace Library.API
             var sqliteConnectionString = Configuration["connectionStrings:SQLite"];
             var mySQLConnectionString = Configuration["connectionStrings:MySQL"];
             services.AddDbContext<LibraryContext>(
-                //options => options.UseSqlite(sqliteConnectionString)
-                options => options.UseMySql(mySQLConnectionString)
+                options => options.UseSqlite(sqliteConnectionString)
+                //options => options.UseMySql(mySQLConnectionString)
             );
 
             // register the repository

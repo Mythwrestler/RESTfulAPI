@@ -13,6 +13,8 @@ namespace Library.API.Services
     {
         Dictionary<string, PropertyMappingValue> GetPropertyMapping<TSource, TDestination>();
 
+        bool ValidMappingExistsFor<TSource, TDestination>(string fields);
+
     }
 
 
