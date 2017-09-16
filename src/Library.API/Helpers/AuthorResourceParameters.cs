@@ -32,7 +32,7 @@ namespace Library.API.Helpers
 
         public string OrderBy {get; set;} = "Name";
 
-
+        public string Fields {get; set;}
         
 
     }
